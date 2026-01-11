@@ -3,7 +3,7 @@ spring:
     name: distributed-task-scheduler
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/taskscheduler
+    url: jdbc:postgresql://localhost:5433/taskscheduler
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -11,11 +11,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false  # CHANGED: Hide SQL logs
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+        format_sql: false  # CHANGED: Don't format SQL
   
   redis:
     host: localhost
@@ -29,8 +29,9 @@ spring:
 
 logging:
   level:
-    com.taskscheduler: DEBUG
-    org.springframework: INFO
+    com.taskscheduler: INFO  # CHANGED: From DEBUG to INFO
+    org.springframework: WARN  # CHANGED: From INFO to WARN
+    org.hibernate: WARN  # ADDED: Reduce Hibernate logs
 
 server:
   port: 8080
